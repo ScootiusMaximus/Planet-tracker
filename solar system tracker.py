@@ -17,7 +17,7 @@ class Info:
     def __init__(self):
         self.H = None
         self.planets = None
-        self.day = 0
+        self.min = 0
         self.stars = []
 
         self.lastStar = 0
@@ -58,10 +58,10 @@ class Info:
                 self.stars.remove(item)
 
     def tick(self):
-        self.day += 1/60
+        self.min += 1/3600
         time = str(datetime.datetime.now())
         self.H = sol.Heliocentric(year=int(time[0:4]), month=int(time[5:7]),
-                             day=int(time[8:10])+self.day, hour=int(time[11:13]),minute=0)
+                             day=int(time[8:10]), hour=int(time[11:13]),minute=self.min)
         self.planets = self.H.planets()
 
     def get_dists(self, angle, radius):
